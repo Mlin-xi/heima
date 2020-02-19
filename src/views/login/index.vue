@@ -5,11 +5,11 @@
         <img src="../../assets/img/logo_index.png" alt />
       </div>
       <!-- 表单组件el-form表单容器 -->
-      <el-form style="margin-top:20px" :model="loginForm" :rules="rules">
+      <el-form style="margin-top:20px" :model="loginForm" :rules="rules" ref="loginForm">
         <!-- 表单项 -->
-        <el-form-item prop="tel">
+        <el-form-item prop="mobile">
           <!-- 组件内容 -->
-          <el-input v-model="loginForm.tel" placeholder="请输入手机号"></el-input>
+          <el-input v-model="loginForm.mobile" placeholder="请输入手机号"></el-input>
         </el-form-item>
         <el-form-item prop="code">
           <el-input v-model="loginForm.code" style="width:250px" placeholder="请输入验证码"></el-input>
@@ -19,7 +19,7 @@
           <el-checkbox v-model="loginForm.check">我已阅读并同意用户协议和隐私条款</el-checkbox>
         </el-form-item>
         <el-form-item>
-          <el-button type="primary" style="width:100%">登录</el-button>
+          <el-button type="primary" style="width:100%" @click="login">登录</el-button>
         </el-form-item>
       </el-form>
     </el-card>
@@ -38,12 +38,13 @@ export default {
     };
     return {
       loginForm: {
-        tel: '', // 手机号
+        mobile: '', // 手机号
         code: '', // 验证码
         check: true // 是否勾选
+        // validator: ""
       },
       rules: {
-        tel: [
+        mobile: [
           { required: ' ture', message: '手机号不能为空', trigger: 'blur' },
           { len: 11, message: '手机长度必须为11个字符', trigger: 'blur' },
           {
@@ -68,7 +69,34 @@ export default {
       }
     };
   },
-  methods: {}
+  methods: {
+    login() {
+      // console.log(11111);
+      this.$refs.loginForm.validate(isOk => {
+        // 校验整个表单的数据
+        if (isOk) {
+          this.$axios({
+            url: '/authorizations',
+            method: 'post',
+            data: this.loginForm
+          })
+            .then(res => {
+              console.log(res);
+              // 将token放到缓存中
+              window.localStorage.setItem('user-token', res.data.data.token);
+              // 编程式导航
+              this.$router.push('/home');
+            })
+            .catch(() => {
+              this.$message({
+                message: '手机号或者验证码不正确',
+                type: 'warning'
+              });
+            });
+        }
+      });
+    }
+  }
 };
 </script>
 
