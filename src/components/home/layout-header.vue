@@ -56,7 +56,7 @@ export default {
       } else {
         //  退出
         window.localStorage.clear() // 清除缓存
-        this.$router.push('/') // 跳转到登录页
+        this.$router.push('login') // 跳转到登录页
       }
     }
   },

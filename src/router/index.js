@@ -7,13 +7,13 @@ import Main from '../views/home/main.vue'
 Vue.use(VueRouter)
 
 const routes = [{
-  path: '/',
+  path: '/login',
   name: 'login',
   component: Login
-}, // , {
-//   path: '/',
-//   redirect: 'Home', // 始终默认
-// }
+}, {
+  path: '/',
+  redirect: 'home' // 始终默认
+},
 {
   path: '/home',
   name: 'home',

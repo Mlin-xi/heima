@@ -85,7 +85,7 @@ export default {
               // 将token放到缓存中
               window.localStorage.setItem('user-token', res.data.data.token);
               // 编程式导航
-              this.$router.push('home');
+              this.$router.push('/');
             })
             .catch(() => {
               this.$message({
