@@ -9,10 +9,10 @@
       <el-col :span="5.5" class="right">
           <el-input class="input"  prefix-icon="el-icon-search" placeholder="请输入搜素的文章内容"></el-input>
           <span class="sp">消息</span>
-        <img class="head-img" src="../../assets/img/avatar.jpg" alt />
+        <img class="head-img" :src="userInfo.photo ? userInfo.photo : defaultImg" alt />
         <el-dropdown style="margin:0" trigger="click">
           <span class="el-dropdown-link">
-            大佬
+            {{userInfo.name}}
           <i class="el-icon-arrow-down el-icon--right"></i>
           </span>
           <el-dropdown-menu slot="dropdown">
@@ -27,7 +27,29 @@
 </template>
 
 <script>
-export default {};
+export default {
+  data () {
+    return {
+      userInfo: {},
+      defaultImg: require('../../assets/img/avatar.jpg')
+    }
+  },
+  methods: {
+    getUserInfo () {
+      const token = window.localStorage.getItem('user-token') // 获取token
+      this.$axios({
+        url: '/user/profile',
+        headers: { Authorization: `Bearer ${token}` }
+      }).then(res => {
+        console.log(res)
+        this.userInfo = res.data.data
+      })
+    }
+  },
+  created () {
+    this.getUserInfo()
+  }
+};
 </script>
 
 <style lang="less" scope>
