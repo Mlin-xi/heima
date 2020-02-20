@@ -4,4 +4,7 @@
 </template>
 
 <style lang="less">
+body{
+  background-color: #e4e4e4
+}
 </style>
