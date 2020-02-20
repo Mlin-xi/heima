@@ -81,11 +81,11 @@ export default {
             data: this.loginForm
           })
             .then(res => {
-              console.log(res);
+              // console.log(res);
               // 将token放到缓存中
               window.localStorage.setItem('user-token', res.data.data.token);
               // 编程式导航
-              this.$router.push('/home');
+              this.$router.push('home');
             })
             .catch(() => {
               this.$message({
