@@ -13,13 +13,12 @@
 </template>
 
 <script>
-import layoutAside from '../../components/home/layout-aside'
-import layoutHeader from '../../components/home/layout-header'
+
 export default {
-  components: {
-    'layout-aside': layoutAside,
-    'layout-header': layoutHeader
-  }
+  // components: {
+  //   'layout-aside': layoutAside,
+  //   'layout-header': layoutHeader
+  // } // 改为全局的组件了在index.js，就像ElementUI一样，直接Vue.use就可以直接用了
 };
 </script>
 <style lang="less" scoped>
