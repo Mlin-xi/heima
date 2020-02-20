@@ -10,15 +10,15 @@
           <el-input class="input"  prefix-icon="el-icon-search" placeholder="请输入搜素的文章内容"></el-input>
           <span class="sp">消息</span>
         <img class="head-img" :src="userInfo.photo ? userInfo.photo : defaultImg" alt />
-        <el-dropdown style="margin:0" trigger="click">
+        <el-dropdown style="margin:0" trigger="click" @command="handleCommand">
           <span class="el-dropdown-link">
             {{userInfo.name}}
           <i class="el-icon-arrow-down el-icon--right"></i>
           </span>
           <el-dropdown-menu slot="dropdown">
-            <el-dropdown-item icon="el-icon-plus">个人信息</el-dropdown-item>
-            <el-dropdown-item icon="el-icon-circle-plus">git地址</el-dropdown-item>
-            <el-dropdown-item icon="el-icon-circle-plus-outline">退出</el-dropdown-item>
+            <el-dropdown-item command="account">个人信息</el-dropdown-item>
+            <el-dropdown-item command="git">git地址</el-dropdown-item>
+            <el-dropdown-item command="lgout">退出</el-dropdown-item>
           </el-dropdown-menu>
         </el-dropdown>
       </el-col>
@@ -35,6 +35,7 @@ export default {
     }
   },
   methods: {
+    // 获取用户信息
     getUserInfo () {
       const token = window.localStorage.getItem('user-token') // 获取token
       this.$axios({
@@ -44,6 +45,19 @@ export default {
         console.log(res)
         this.userInfo = res.data.data
       })
+    },
+    // 点击菜单项触发的方法
+    handleCommand (command) {
+      if (command === 'account') {
+        // 个人信息
+      } else if (command === 'git') {
+        //  git地址
+        window.location.href = 'https://github.com/Mlin-xi/heima.git'
+      } else {
+        //  退出
+        window.localStorage.clear() // 清除缓存
+        this.$router.push('/') // 跳转到登录页
+      }
     }
   },
   created () {
