@@ -37,10 +37,10 @@ export default {
   methods: {
     // 获取用户信息
     getUserInfo () {
-      const token = window.localStorage.getItem('user-token') // 获取token
+      // const token = window.localStorage.getItem('user-token') // 获取token
       this.$axios({
-        url: '/user/profile',
-        headers: { Authorization: `Bearer ${token}` }
+        url: '/user/profile'
+        // headers: { Authorization: `Bearer ${token}` }
       }).then(res => {
         console.log(res)
         this.userInfo = res.data.data
