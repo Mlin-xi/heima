@@ -87,12 +87,12 @@ export default {
               // 编程式导航
               this.$router.push('/');
             })
-            .catch(() => {
-              this.$message({
-                message: '手机号或者验证码不正确',
-                type: 'warning'
-              });
-            });
+            // .catch(() => {
+            //   this.$message({
+            //     message: '手机号或者验证码不正确',
+            //     type: 'warning'
+            //   });
+            // });
         }
       });
     }
