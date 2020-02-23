@@ -7,10 +7,16 @@ axios.interceptors.request.use(function (config) {
   // config 是axios的默认请求配置，和传入的配置 结合出来的
   // 必须将config return 不return 不行
   const token = window.localStorage.getItem('user-token')
-  config.headers.Authorization = `Bearer  ${token}`
+  config.headers.Authorization = `Bearer ${token}`
   return config
 }, function (error
 ) {
   return Promise.reject(error)
 })
+
+// 响应拦截器
+axios.interceptors.response.use(function (response) {
+  // debugger
+  return response.data ? response.data : {}
+}, function () { })
 export default axios

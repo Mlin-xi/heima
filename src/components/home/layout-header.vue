@@ -42,8 +42,8 @@ export default {
         url: '/user/profile'
         // headers: { Authorization: `Bearer ${token}` }
       }).then(res => {
-        console.log(res)
-        this.userInfo = res.data.data
+        // console.log(res)
+        this.userInfo = res.data
       })
     },
     // 点击菜单项触发的方法
